@@ -8,7 +8,7 @@ void setup() {
   Serial.begin(9600);
   pinMode(ENCA,INPUT);
   pinMode(ENCB,INPUT);
-  attachInterrupt(digitalPinToInterrupt(ENCA),readEncoder,RISING);
+  attachInterrupt(digitalPinToInterrupt(ENCA),readEncoder,FALLING);
   Serial.println("target pos");
 }
 
