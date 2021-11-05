@@ -1,7 +1,7 @@
-#define ENCA 21 // YELLOW
-#define ENCB 20 // WHITE
+#define ENCA 21 
+#define ENCB 20 
 
-volatile int posi = 0; // specify posi as volatile: https://www.arduino.cc/reference/en/language/variables/variable-scope-qualifiers/volatile/
+volatile int posi = 0;
 float ang;
 
 void setup() {
