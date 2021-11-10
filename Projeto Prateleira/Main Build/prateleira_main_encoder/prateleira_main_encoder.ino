@@ -10,7 +10,7 @@
 #define End1 7 // limit switch 'zera' referência de posição
 
 // motor driver
-#define RPWM 3 // porta pwm motor
+int RPWM = 3; // porta pwm motor
 
 // encoder
 #define encIN 2 // pinos 2, 3, 18, 19, 20, 21 necessários para usar com attachInterrupt no Arduino Mega
@@ -50,8 +50,11 @@ void setup() {
 }
 
 void loop() { 
-//  controleMotor(); // lê os estados dos botões e controla o motor
-  controleSerial(); // mostra os valores dos estados dos pushbuttons e encoder
+  controleMotor(); // lê os estados dos botões e controla o motor
+  
+  // controleSerial(); // mostra os valores dos estados dos pushbuttons e encoder
+  // controleSerial() desativado para programa oficial da prateleira
+  // dados da porta serial não são necessários
 }
 
 void contador() { // realiza contagem de pulsos
@@ -125,25 +128,21 @@ void controleSerial() {
   Serial.print(RPWM);
   Serial.println();
    
-//  Serial.print("btnState2: ");
-//  Serial.print(btnState2);
-//  Serial.print('\t');
-//
-//  Serial.print("btnState3: ");
-//  Serial.print(btnState3);
-//  Serial.print('\t');
-//  
-//  Serial.print("btnState4: ");
-//  Serial.print(btnState4);
-//  Serial.print('\t');
-//  
-//  Serial.print("btnState5: ");
-//  Serial.print(btnState5);
-//  Serial.print('\t');
+  Serial.print("btnState2: ");
+  Serial.print(btnState2);
+  Serial.print('\t');
+
+  Serial.print("btnState3: ");
+  Serial.print(btnState3);
+  Serial.print('\t');
   
-//  Serial.println();
+  Serial.print("btnState4: ");
+  Serial.print(btnState4);
+  Serial.print('\t');
+  
+  Serial.print("btnState5: ");
+  Serial.print(btnState5);
+  Serial.print('\t');
+  
+  Serial.println();
 }
-
-
-
-  
