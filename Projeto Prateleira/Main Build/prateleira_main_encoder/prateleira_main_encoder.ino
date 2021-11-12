@@ -20,7 +20,6 @@ int btnState5 = 0;
 int btnState6 = 0;
 
 int j = 0; // variável contadora de pulsos e posição
-int i = 0;
 int target = 0;
 
 void setup() {
