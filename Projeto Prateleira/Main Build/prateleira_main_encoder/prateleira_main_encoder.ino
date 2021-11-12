@@ -6,11 +6,8 @@
 #define btn5 9
 #define btn6 8 // pushbutton modo de calibração
 
-// limit switch calibração
-#define End1 7 // limit switch 'zera' referência de posição
-
 // motor driver
-int RPWM = 3; // porta pwm motor
+#define RPWM 3 // porta pwm motor
 
 // encoder
 #define encIN 2 // pinos 2, 3, 18, 19, 20, 21 necessários para usar com attachInterrupt no Arduino Mega
@@ -20,6 +17,7 @@ int btnState2 = 0;
 int btnState3 = 0; 
 int btnState4 = 0; 
 int btnState5 = 0;  
+int btnState6 = 0;
 
 int j = 0; // variável contadora de pulsos e posição
 int i = 0;
@@ -32,9 +30,8 @@ void setup() {
   pinMode(btn3, INPUT);
   pinMode(btn4, INPUT);
   pinMode(btn5, INPUT);
-  pinMode(btn6, INPUT); // botão para calibração
-  pinMode(End1, INPUT); // 'zero' absoluto
-
+  pinMode(btn6, INPUT); // botão para calibração origem 'zero'
+  
   // sinal do encoder
   pinMode(encIN, INPUT);
 
@@ -71,12 +68,20 @@ void controleMotor() {
   btnState3 = digitalRead(btn3);
   btnState4 = digitalRead(btn4);
   btnState5 = digitalRead(btn5);
+  btnState6 = digitalRead(btn6);
+  
+  // define posição atual como origem, j = 0, posição 5 (0º = 360º)
+  if (btnState6 == HIGH) {
+    analogWrite(RPWM, 0);
+    j = 0;
+    target = 0;
+  }
   
   // controle do motor com pushbuttons e sinal do encoder
   if (btnState1 == HIGH) {
     target = 4;
     while (j != target) {
-      analogWrite(RPWM, 20);
+      analogWrite(RPWM, 50);
     }
     analogWrite(RPWM, 0);
   }
@@ -84,7 +89,7 @@ void controleMotor() {
   if (btnState2 == HIGH) {
     target = 8;
     while (j != target) {
-      analogWrite(RPWM, 20);
+      analogWrite(RPWM, 50);
     }
     analogWrite(RPWM, 0);
   }
@@ -92,7 +97,7 @@ void controleMotor() {
   if (btnState3 == HIGH) {
     target = 12;
     while (j != target) {
-      analogWrite(RPWM, 20);
+      analogWrite(RPWM, 50);
     }
     analogWrite(RPWM, 0);
   }
@@ -100,7 +105,7 @@ void controleMotor() {
   if (btnState4 == HIGH) {
     target = 16;
     while (j != target) {
-      analogWrite(RPWM, 20);
+      analogWrite(RPWM, 50);
     }
     analogWrite(RPWM, 0);
   }
@@ -108,7 +113,7 @@ void controleMotor() {
   if (btnState5 == HIGH) {
     target = 0;
     while (j != target) {
-      analogWrite(RPWM, 20);
+      analogWrite(RPWM, 50);
     }
     analogWrite(RPWM, 0);
   }
@@ -120,14 +125,6 @@ void controleSerial() {
   Serial.print(btnState1);
   Serial.print('\t');
 
-  Serial.print("Posição: ");
-  Serial.print(j);
-  Serial.print('\t');
-  
-  Serial.print("PWM: ");
-  Serial.print(RPWM);
-  Serial.println();
-   
   Serial.print("btnState2: ");
   Serial.print(btnState2);
   Serial.print('\t');
@@ -143,6 +140,16 @@ void controleSerial() {
   Serial.print("btnState5: ");
   Serial.print(btnState5);
   Serial.print('\t');
+
+  Serial.print("btnState6: ");
+  Serial.print(btnState6);
+  Serial.print('\t');
   
+  Serial.print("Posição: ");
+  Serial.print(j);
+  Serial.print('\t');
+  
+  Serial.print("PWM: ");
+  Serial.print(RPWM);
   Serial.println();
 }
