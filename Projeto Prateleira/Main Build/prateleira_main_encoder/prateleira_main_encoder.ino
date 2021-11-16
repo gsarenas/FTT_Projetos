@@ -4,7 +4,6 @@
 #define btn3 11
 #define btn4 10
 #define btn5 9
-#define btn6 8 // pushbutton modo de calibração
 
 // motor driver
 #define RPWM 3 // porta pwm motor
@@ -80,7 +79,7 @@ void controleMotor() {
   if (btnState1 == HIGH) {
     target = 4;
     while (j != target) {
-      analogWrite(RPWM, 50);
+      analogWrite(RPWM, 130);
     }
     analogWrite(RPWM, 0);
   }
@@ -88,7 +87,7 @@ void controleMotor() {
   if (btnState2 == HIGH) {
     target = 8;
     while (j != target) {
-      analogWrite(RPWM, 50);
+      analogWrite(RPWM, 130);
     }
     analogWrite(RPWM, 0);
   }
@@ -96,7 +95,7 @@ void controleMotor() {
   if (btnState3 == HIGH) {
     target = 12;
     while (j != target) {
-      analogWrite(RPWM, 50);
+      analogWrite(RPWM, 130);
     }
     analogWrite(RPWM, 0);
   }
@@ -104,7 +103,7 @@ void controleMotor() {
   if (btnState4 == HIGH) {
     target = 16;
     while (j != target) {
-      analogWrite(RPWM, 50);
+      analogWrite(RPWM, 130);
     }
     analogWrite(RPWM, 0);
   }
@@ -112,7 +111,7 @@ void controleMotor() {
   if (btnState5 == HIGH) {
     target = 0;
     while (j != target) {
-      analogWrite(RPWM, 50);
+      analogWrite(RPWM, 130);
     }
     analogWrite(RPWM, 0);
   }
